@@ -1,15 +1,11 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
+syntax: glob
 
-pids
-logs
-results
+dist
+tmp
+*swp
 
-npm-debug.log
-node_modules
+node_modules/*
+bower_components/*
+tests/dist/
+
+tests/lib/tmpl.min.js
