@@ -11229,7 +11229,7 @@ define("callbacks",
           self.users = data;
           $.getJSON('/contacts').done(function(data) {
             self.contacts = data;
-            $.getJSON('/contacts').done(function(data) {
+            $.getJSON('/companies').done(function(data) {
               self.companies = data;
               callback(self);
             });
