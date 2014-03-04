@@ -10,10 +10,10 @@ BulkLoader.prototype.load = function(callback){
   $.getJSON('/login').done(function(data) {
     $.getJSON('/users').done(function(data) {
       self.users = data;
-      $.getJSON('/companies').done(function(data) {
-        self.companies = data;
+      $.getJSON('/contacts').done(function(data) {
+        self.contacts = data;
         $.getJSON('/contacts').done(function(data) {
-          self.contacts = data;
+          self.companies = data;
           callback(self);
         });
       });

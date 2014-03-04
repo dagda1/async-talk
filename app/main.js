@@ -11227,10 +11227,10 @@ define("callbacks",
       $.getJSON('/login').done(function(data) {
         $.getJSON('/users').done(function(data) {
           self.users = data;
-          $.getJSON('/companies').done(function(data) {
-            self.companies = data;
+          $.getJSON('/contacts').done(function(data) {
+            self.contacts = data;
             $.getJSON('/contacts').done(function(data) {
-              self.contacts = data;
+              self.companies = data;
               callback(self);
             });
           });
@@ -11244,7 +11244,7 @@ define("generator-utils",
   ["exports"],
   function(__exports__) {
     "use strict";
-    function spawn(generatorFunc) {
+    __exports__["default"] = function async(generatorFunc) {
       function continuer(verb, arg) {
         var result;
         try {
@@ -11252,15 +11252,19 @@ define("generator-utils",
         } catch (err) {
           return RSVP.Promise.reject(err);
         }
-
-        if(result.done) {
+        if (result.done) {
           return result.value;
         } else {
+          return RSVP.Promise.resolve(result.value).then(callback, errback);
         }
       }
-    }
 
-    __exports__["default"] = spawn;
+      var generator = generatorFunc();
+      var callback = continuer.bind(continuer, "next");
+      var errback = continuer.bind(continuer, "throw");
+
+      return callback();
+    }
   });
 define("generators", 
   ["exports"],
